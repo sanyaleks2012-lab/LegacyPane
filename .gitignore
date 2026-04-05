@@ -1,0 +1,22 @@
+# Build artifacts
+code.pbin
+panorama.table.txt
+
+# Backup directory
+2/
+
+# Game files (not our modifications)
+fonts/
+videos/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS files
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Qwen settings
+.qwen/
