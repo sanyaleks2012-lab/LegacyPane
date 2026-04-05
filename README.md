@@ -31,34 +31,34 @@ Custom Panorama UI for CS:GO Legacy. Cleaner interface, loading screen from Clas
 
 ## Installation
 
-1. Download `code.pbin` from [Releases](https://github.com/sanyaleks2012-lab/LegacyPane/releases)
-2. Place it in your CS:GO directory:
-   ```
-   csgo/panorama/code.pbin
-   ```
-3. Restart the game
+Download `code.pbin` from [Releases](https://github.com/sanyaleks2012-lab/LegacyPane/releases) and place it in:
 
-That's it.
+```
+csgo/panorama/code.pbin
+```
+
+Restart the game.
 
 ---
 
 ## Building from source
 
-Requires Python 3.
+### Prerequisites
+- Python 3
 
+### Using the build script
 ```
 cd csgo/panorama
 com.bat
 ```
 
-Or run the two scripts manually:
-
+### Manual build
 ```
 py tablelayout.py -i panorama
 py buildpbin.py -i panorama -table panorama.table.txt -o code.pbin
 ```
 
-The build system packs all source files into a ZIP, then patches it into Valve's proprietary `.pbin` format (PAN header, version bytes, XZP1 metadata).
+The build process packs all source files into a ZIP archive and converts it to Valve's `.pbin` format. For more details on the format, see [PBIN-Packer](https://github.com/901D3/PBIN-Packer).
 
 ---
 
@@ -77,9 +77,12 @@ panorama/
 
 ## Credits
 
-- [Classic Offensive](https://github.com/CSCO-dev/ClassicOffensive) — loading screen
-- Valve — CS:GO and Panorama framework
+- Loading screen ported from [Classic Offensive](https://steamcommunity.com/id/zoolsmith) by **zoolsmith**
+- PBIN build tooling by [901D3](https://github.com/901D3/PBIN-Packer)
+- Valve -- CS:GO and Panorama framework
 
 ---
+
+Made by [sanyaleks2012-lab](https://steamcommunity.com/profiles/76561198726950349/)
 
 Not affiliated with Valve. Use at your own risk.

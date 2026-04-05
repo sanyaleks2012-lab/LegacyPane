@@ -77,28 +77,10 @@ var MainMenu = ( function() {
 
 	function _FetchTournamentData ()
 	{
-		                                         
-
-		                                                             
-		if ( _m_jobFetchTournamentData )
-			return;
-		
-		TournamentsAPI.RequestTournaments();
-			
-		_m_jobFetchTournamentData = $.Schedule( TOURNAMENT_FETCH_DELAY, function ()
-		{
-			_m_jobFetchTournamentData = null;
-			_FetchTournamentData();
-		} );
 	}
 
 	function _StopFetchingTournamentData ()
 	{
-		if ( _m_jobFetchTournamentData )
-		{
-			$.CancelScheduled( _m_jobFetchTournamentData );
-			_m_jobFetchTournamentData = null;
-		}
 	}
 
 	var _SetBackgroundMovie = function()
@@ -174,10 +156,6 @@ var MainMenu = ( function() {
 
 	var _TournamentDraftUpdate = function ()
 	{
-		if ( !m_TournamentPickBanPopup || !m_TournamentPickBanPopup.IsValid() )
-		{
-			m_TournamentPickBanPopup = UiToolkitAPI.ShowCustomLayoutPopup( 'tournament_pickban_popup', 'file://{resources}/layout/popups/popup_tournament_pickban.xml' );
-		}
 	}
 
 	var _m_bGcLogonNotificationReceivedOnce = false;
@@ -352,8 +330,7 @@ var MainMenu = ( function() {
 		                                                                                        
 		$( '#MainMenuNavBarReportServer' ).SetHasClass( 'mainmenu-navbar__btn-small--hidden', !bIsCommunityServer );
 
-		                                                                                           
-		$( '#MainMenuNavBarShowCommunityServerBrowser' ).SetHasClass( 'mainmenu-navbar__btn-small--hidden', !bIsCommunityServer );
+		$( '#MainMenuNavBarShowCommunityServerBrowser' ).SetHasClass( 'mainmenu-navbar__btn-small--hidden', false );
 		
 
 		                                                            
@@ -714,68 +691,7 @@ var MainMenu = ( function() {
 	};
 
 	var _InitNewsAndStore = function ()
-	{	
-		                             
-		_AddStream();
-
-		                             
-		var elLimitedTest = $.CreatePanel( 'Panel', $.FindChildInContext( '#JsNewsContainer' ), 'JsLimitedTest' );
-		elLimitedTest.BLoadLayout( 'file://{resources}/layout/mainmenu_limitedtest.xml', false, false );
-
-		_BetaEnrollmentStatusChange();
-		
-		                             
-		var elNews = $.CreatePanel( 'Panel', $.FindChildInContext( '#JsNewsContainer' ), 'JsNewsPanel' );
-		elNews.BLoadLayout( 'file://{resources}/layout/mainmenu_news.xml', false, false );
-
-		                             
-		var elLastMatch = $.CreatePanel( 'Panel', $.FindChildInContext( '#JsNewsContainer' ), 'JsLastMatch' );
-		elLastMatch.BLoadLayout( 'file://{resources}/layout/mainmenu_lastmatch.xml', false, false );
-
-		                             
-		var elStore = $.CreatePanel( 'Panel', $.FindChildInContext( '#JsNewsContainer' ), 'JsStorePanel' );
-		elStore.BLoadLayout( 'file://{resources}/layout/mainmenu_store.xml', false, false );
-
-		                             
-		                                                                                                            
-	                                                  
-	  	                                                                                                                          
-	  	                                                                                                                                 
-		      
-		
-		$.FindChildInContext( '#JsNewsContainer' ).OnPropertyTransitionEndEvent = function ( panelName, propertyName )
-		{
-			if( elNews.id === panelName && propertyName === 'opacity')
-			{
-				                                         
-				if( elNews.visible === true && elNews.BIsTransparent() )
-				{
-					                                               
-					elNews.visible = false;
-					elNews.SetReadyForDisplay( false );
-					return true;
-				}
-			}
-
-			return false;
-		};
-
-		                            
-		var bFeaturedPanelIsActive = false;
-		
-		if ( bFeaturedPanelIsActive )
-		{
-			                                                                                
-			                                                                                 
-			_AddFeaturedPanel( 'operation/operation_mainmenu.xml', 'JsOperationPanel' );
-		}
-		                                                                           
-		                          
-		    
-			_AddWatchNoticePanel();
-		    
-		
-		_ShowNewsAndStore();
+	{
 	};
 
 	var _AddStream = function()
@@ -816,12 +732,8 @@ var MainMenu = ( function() {
 
 	var _AddWatchNoticePanel = function()
 	{
-		var WatchNoticeXML = 'file://{resources}/layout/mainmenu_watchnotice.xml';
-		var elPanel = $.CreatePanel( 'Panel', $.FindChildInContext( '#JsNewsContainer' ), 'JsWatchNoticePanel' );
-		$.FindChildInContext( '#JsNewsContainer' ).MoveChildAfter( elPanel, $( "#JsNewsPanel") );
-		elPanel.BLoadLayout( WatchNoticeXML, false, false );
 	}
-	
+
 	var _ShowNewsAndStore = function ()
 	{
 		var elPanel = $.FindChildInContext( '#JsNewsContainer' );
@@ -1157,7 +1069,6 @@ var MainMenu = ( function() {
 
 	var _OpenSubscriptionUpsell = function ()
 	{
-		UiToolkitAPI.ShowCustomLayoutPopupParameters( '', 'file://{resources}/layout/popups/popup_subscription_upsell.xml', '' );
 	}
 
 	var _OpenSettings = function()
@@ -1344,11 +1255,6 @@ var MainMenu = ( function() {
 	
 	var _UpdateSubscriptionAlert = function()
 	{
-		var elNavBar = $.GetContextPanel().FindChildInLayoutFile('JsMainMenuNavBar'),
-		elAlert = elNavBar.FindChildInLayoutFile('MainMenuSubscriptionAlert');
-
-		var hideAlert = GameInterfaceAPI.GetSettingString( 'ui_show_subscription_alert' ) === '1' ? true : false;
-		elAlert.SetHasClass('hidden', hideAlert )
 	}
 
 	function _CancelNotificationSchedule()
