@@ -140,7 +140,7 @@ goto main_menu
 :git_add_commit
 cls
 echo ============================================
-echo   Add all and commit
+echo   Add all and Commit
 echo ============================================
 echo.
 git add -A
@@ -162,17 +162,16 @@ echo.
 git remote -v | findstr "origin" >nul 2>&1
 if errorlevel 1 (
     echo  Remote 'origin' not found.
-    echo.
     set /p "REPO_URL=Enter repo URL (or press Enter for default): "
     if "!REPO_URL!"=="" set "REPO_URL=https://github.com/%GIT_USER%/%GIT_REPO%.git"
     git remote add origin "!REPO_URL!"
     echo  [+] Remote added
 )
-git pull --rebase origin main`n    if errorlevel 1 (`n        echo  [!] Pull failed, aborting push`n        goto main_menu`n    )`n    git push -u origin main
-if errorlevel 1 (
-    echo  Push to master failed, trying main...
-    git pull --rebase origin main`n    if errorlevel 1 (`n        echo  [!] Pull failed, aborting push`n        goto main_menu`n    )`n    git push -u origin main
-)
+echo  Pulling latest changes...
+git pull --rebase origin main
+echo.
+echo  Pushing...
+git push origin main
 echo.
 pause
 goto main_menu
@@ -191,7 +190,7 @@ if "!COMMIT_MSG!"=="" set "COMMIT_MSG=auto update"
 git commit -m "!COMMIT_MSG!"
 if errorlevel 1 (
     echo  [!] Nothing to commit
-    choice /c yn /n /m "Continue push anyway? (y/n): "
+    choice /c yn /n /m "Continue anyway? (y/n): "
     if !errorlevel! equ 2 goto main_menu
 )
 echo.
@@ -201,13 +200,17 @@ if errorlevel 1 (
     if "!REPO_URL!"=="" set "REPO_URL=https://github.com/%GIT_USER%/%GIT_REPO%.git"
     git remote add origin "!REPO_URL!"
 )
-git pull --rebase origin main`n    if errorlevel 1 (`n        echo  [!] Pull failed, aborting push`n        goto main_menu`n    )`n    git push -u origin main
+echo  Pulling latest changes...
+git pull --rebase origin main
 if errorlevel 1 (
-    git pull --rebase origin main`n    if errorlevel 1 (`n        echo  [!] Pull failed, aborting push`n        goto main_menu`n    )`n    git push -u origin main
+    echo  [!] Pull failed
+    pause
+    goto main_menu
 )
+echo.
+echo  Pushing...
+git push origin main
 echo.
 echo  [!] Done!
 pause
 goto main_menu
-
-
