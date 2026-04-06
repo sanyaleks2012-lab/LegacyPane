@@ -28,3 +28,5 @@ QWEN.md
 *.pbin
 *.table.txt
 *.zip
+git-manager.bat
+resource/
