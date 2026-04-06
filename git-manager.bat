@@ -168,10 +168,10 @@ if errorlevel 1 (
     git remote add origin "!REPO_URL!"
     echo  [+] Remote added
 )
-git push -u origin main
+git pull --rebase origin main`n    if errorlevel 1 (`n        echo  [!] Pull failed, aborting push`n        goto main_menu`n    )`n    git push -u origin main
 if errorlevel 1 (
     echo  Push to master failed, trying main...
-    git push -u origin main
+    git pull --rebase origin main`n    if errorlevel 1 (`n        echo  [!] Pull failed, aborting push`n        goto main_menu`n    )`n    git push -u origin main
 )
 echo.
 pause
@@ -201,12 +201,13 @@ if errorlevel 1 (
     if "!REPO_URL!"=="" set "REPO_URL=https://github.com/%GIT_USER%/%GIT_REPO%.git"
     git remote add origin "!REPO_URL!"
 )
-git push -u origin main
+git pull --rebase origin main`n    if errorlevel 1 (`n        echo  [!] Pull failed, aborting push`n        goto main_menu`n    )`n    git push -u origin main
 if errorlevel 1 (
-    git push -u origin main
+    git pull --rebase origin main`n    if errorlevel 1 (`n        echo  [!] Pull failed, aborting push`n        goto main_menu`n    )`n    git push -u origin main
 )
 echo.
 echo  [!] Done!
 pause
 goto main_menu
+
 
