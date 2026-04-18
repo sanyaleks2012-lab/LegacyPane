@@ -4,7 +4,7 @@ Custom Panorama UI for CS:GO Legacy. Cleaner interface, loading screen from Clas
 
 ---
 
-[![LegacyPane на Steam](https://cdn.cloudflare.steamstatic.com/steam/apps/4465480/header.jpg)](https://store.steampowered.com/app/4465480/LegacyPane/)
+[![Steam](https://img.shields.io/badge/Steam-LegacyPane-blue?logo=steam&logoColor=white)](https://store.steampowered.com/app/4465480/LegacyPane/)
 
 ## What it does
 
