@@ -4,6 +4,8 @@ Custom Panorama UI for CS:GO Legacy. Cleaner interface, loading screen from Clas
 
 ---
 
+<iframe src="https://store.steampowered.com/widget/4465480/" frameborder="0" width="646" height="190"></iframe>
+
 ## What it does
 
 **Removes clutter from the main menu:**
